@@ -27,8 +27,9 @@ router.get("/", async (req, res) => {
 });
 
 function generateNestLink(lat, lng) {
-  // This would be the mission room
+  // This would be the mission room in SyncNest that would be 
   // Generated for a location
+  // # TO-DO
   return lat + "boom" + lng;
 }
 
