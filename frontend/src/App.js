@@ -2,9 +2,13 @@ import * as React from "react";
 import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
+import axios from "axios";
 import { Star } from "@material-ui/icons";
 import "./app.css";
+import Avatar from "@material-ui/core/Avatar";
+
 function App() {
+  const [pins, setPins] = useState([]);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -12,7 +16,20 @@ function App() {
     longitude: 17,
     zoom: 1,
   });
-  const [showPopup, setShowPopup] = React.useState(true);
+
+  React.useEffect(() => {
+    const getPins = async () => {
+      try {
+        const res = await axios.get("/pins");
+        setPins(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getPins();
+  }, []);
+
+  // const [showPopup, setShowPopup] = React.useState(true);
   return (
     <Map
       initialViewState={viewstate}
@@ -21,34 +38,43 @@ function App() {
       mapStyle="mapbox://styles/mapbox/navigation-night-v1"
       onMove={(nextViewstate) => setViewstate(nextViewstate)}
     >
-      <Marker longitude={46} latitude={17} anchor="bottom"></Marker>
-      {showPopup && (
-        <Popup
-          longitude={46}
-          latitude={17}
-          anchor="bottom"
-          onClose={() => setShowPopup(false)}
-        >
-          <div className="card">
-            <label>Place</label>
-            <h4 className="place">Eiffel Tower</h4>
-            <label>Type</label>
-            <p className="desc">Recon Op</p>
-            <label>Critical Level</label>
-            <div className="stars">
-              <Star />
-              <Star />
-              <Star />
-              <Star />
+      {pins.map((p) => (
+        <>
+          <Marker longitude={p.long} latitude={p.lat} anchor="bottom"></Marker>
+
+          <Popup longitude={p.long} latitude={p.lat} anchor="bottom">
+            <div className="card">
+              <label>Place</label>
+              <h4 className="place">Eiffel Tower</h4>
+              <label>Type</label>
+              <p className="desc">Recon Op</p>
+
+              <label>
+                Join Nest
+                <Avatar
+                  className="syncNestLogo"
+                  alt="SyncNest - Logo"
+                  src={require(".//SyncNest.png")}
+                />
+                <br></br>
+              </label>
+
+              <label>Critical Level</label>
+              <div className="stars">
+                <Star className="star" />
+                <Star className="star" />
+                <Star className="star" />
+                <Star className="star" />
+              </div>
+              <label>Information </label>
+              <span className="username">
+                Created by <b>{p.username}</b>
+              </span>
+              <span className="date">1 hour ago</span>
             </div>
-            <label>Information </label>
-            <span className="username">
-              Created by <b>Anurag</b>
-            </span>
-            <span className="date">1 hour ago</span>
-          </div>
-        </Popup>
-      )}
+          </Popup>
+        </>
+      ))}
     </Map>
   );
 }
