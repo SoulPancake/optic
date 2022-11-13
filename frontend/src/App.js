@@ -6,7 +6,8 @@ import axios from "axios";
 import { Star } from "@material-ui/icons";
 import "./app.css";
 import Avatar from "@material-ui/core/Avatar";
-
+import {format} from 'timeago.js'
+import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 function App() {
   const [pins, setPins] = useState([]);
   const [viewstate, setViewstate] = useState({
@@ -40,14 +41,28 @@ function App() {
     >
       {pins.map((p) => (
         <>
-          <Marker longitude={p.long} latitude={p.lat} anchor="bottom"></Marker>
+          <Marker 
+            longitude={p.long} 
+            latitude={p.lat} 
+            
+           
+          >
 
-          <Popup longitude={p.long} latitude={p.lat} anchor="bottom">
+            <CoronavirusIcon>
+
+            </CoronavirusIcon>
+
+          </Marker>
+
+          <Popup 
+            longitude={p.long} 
+            latitude={p.lat} 
+            anchor="bottom">
             <div className="card">
               <label>Place</label>
               <h4 className="place">Eiffel Tower</h4>
               <label>Type</label>
-              <p className="desc">Recon Op</p>
+              <p className="desc">{p.description}</p>
 
               <label>
                 Join Nest
@@ -70,7 +85,7 @@ function App() {
               <span className="username">
                 Created by <b>{p.username}</b>
               </span>
-              <span className="date">1 hour ago</span>
+              <span className="date">{format(p.createdAt)}</span>
             </div>
           </Popup>
         </>
