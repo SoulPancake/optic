@@ -7,7 +7,6 @@ const PinSchema = new mongoose.Schema(
       require: true,
       min: 3,
       max: 20,
-      unique: true,
     },
     title: {
       type: String,
