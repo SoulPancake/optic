@@ -6,7 +6,7 @@ import axios from "axios";
 import { Star } from "@material-ui/icons";
 import "./app.css";
 import Avatar from "@material-ui/core/Avatar";
-import {format} from 'timeago.js'
+import {format} from 'timeago.js';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 function App() {
   const [pins, setPins] = useState([]);
@@ -44,13 +44,10 @@ function App() {
           <Marker 
             longitude={p.long} 
             latitude={p.lat} 
-            
-           
           >
 
-            <CoronavirusIcon>
+           //https://youtu.be/9oEQvI7K-rA?t=3898
 
-            </CoronavirusIcon>
 
           </Marker>
 
