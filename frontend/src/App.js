@@ -13,6 +13,7 @@ function App() {
   const currentUser = "Jane"
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
+  const [ newPlace,setNewPlace] = useState(null)
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -42,8 +43,12 @@ function App() {
     
   };
 
-  function handleMapClick(e) {
-     
+  const handleAddClick = (e) =>{
+    const [ long,lat] = e.lngLat;
+    setNewPlace({
+      lat,
+      long
+    })
   }
 
 
@@ -54,7 +59,7 @@ function App() {
       style={{ width: "100vw", height: "100vh" }}
       mapStyle="mapbox://styles/mapbox/navigation-night-v1"
       onMove={(nextViewstate) => setViewstate(nextViewstate)}
-      onClick={handleMapClick}
+      onDblClick={handleAddClick}
     >
       {pins.map((p) => (
         <>
