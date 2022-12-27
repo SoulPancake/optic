@@ -3,15 +3,15 @@ import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
 import axios from "axios";
-import {  Star } from "@material-ui/icons";
+import { Star } from "@material-ui/icons";
 import "./app.css";
 import Avatar from "@material-ui/core/Avatar";
 
-import {format} from 'timeago.js';
+import { format } from "timeago.js";
 
 function App() {
   const [pins, setPins] = useState([]);
-  const [currentPlaceID,setCurrentPlaceID] = useState(0);
+  const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -32,14 +32,15 @@ function App() {
     getPins();
   }, []);
 
-
   const handleMarkerClick = (id) => {
-    console.log("clicked ",id);
-     setCurrentPlaceID(id);
-     console.log(currentPlaceID,"and",id)
+    console.log(id);
+    setCurrentPlaceID(id);
+  };
+
+  function handleMapClick(e) {
+     
   }
 
-  
 
   return (
     <Map
@@ -48,50 +49,44 @@ function App() {
       style={{ width: "100vw", height: "100vh" }}
       mapStyle="mapbox://styles/mapbox/navigation-night-v1"
       onMove={(nextViewstate) => setViewstate(nextViewstate)}
+      onClick={handleMapClick}
     >
       {pins.map((p) => (
         <>
-          <Marker 
-            longitude={p.long} 
-            latitude={p.lat} 
-            onClick={()=>handleMarkerClick(p._id)}
-           interactive={true}
-          >
+          <Marker
+            longitude={p.long}
+            latitude={p.lat}
+            onClick={() => handleMarkerClick(p._id)}
+            interactive={true}
+          ></Marker>
 
-
-
-          </Marker>
-
-      
-               
-       
-
-         {p._id === currentPlaceID && (<Popup 
-              longitude={p.long} 
-              latitude={p.lat} 
-              anchor="bottom"
+          {p._id === currentPlaceID && (
+            <Popup
+              longitude={p.long}
+              latitude={p.lat}
+              anchor="top"
               closeButton={true}
-                closeOnClick={false}
-                onClose={() => setCurrentPlaceID(0)}>
+              closeOnClick={false}
+              onClose={() => setCurrentPlaceID(0)}
+            >
               <div className="card">
                 <label>Place</label>
                 <h4 className="place">Eiffel Tower</h4>
                 <label>Type</label>
                 <p className="desc">{p.description}</p>
-  
+
                 <label>
                   Join Nest
                   <a href="https://syncnest.onrender.com/">
-                  <Avatar
-                    className="syncNestLogo"
-                    alt="SyncNest - Logo"
-                    src={require(".//SyncNest.png")}
-                  />
-                    </ a>
-                  
+                    <Avatar
+                      className="syncNestLogo"
+                      alt="SyncNest - Logo"
+                      src={require(".//SyncNest.png")}
+                    />
+                  </a>
                   <br></br>
                 </label>
-  
+
                 <label>Critical Level</label>
                 <div className="stars">
                   <Star className="star" />
@@ -105,13 +100,9 @@ function App() {
                 </span>
                 <span className="date">{format(p.createdAt)}</span>
               </div>
-            </Popup> )}
-            
-           
-       
-        
-          
-        </ >
+            </Popup>
+          )}
+        </>
       ))}
     </Map>
   );
