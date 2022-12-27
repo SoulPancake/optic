@@ -6,14 +6,12 @@ import axios from "axios";
 import {  Star } from "@material-ui/icons";
 import "./app.css";
 import Avatar from "@material-ui/core/Avatar";
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 
 import {format} from 'timeago.js';
 
 function App() {
   const [pins, setPins] = useState([]);
-  const [currentPlaceID,setCurrentPlaceID] = useState(null);
+  const [currentPlaceID,setCurrentPlaceID] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -35,27 +33,13 @@ function App() {
   }, []);
 
 
-   const handleMarkerClick = (id,lat,long) => {
-          setCurrentPlaceID(lat,long);
-          if(showPopup) setShowPopup(false);
-          else setShowPopup(true)
-  };
-
-  const openModal = (lat,long) =>{
-      console.log("Open Modal called" , lat,long)
-      handleOpen()
+  const handleMarkerClick = (id) => {
+    console.log("clicked ",id);
+     setCurrentPlaceID(id);
+     console.log(currentPlaceID,"and",id)
   }
 
-   const [showPopup, setShowPopup] = React.useState(false);
-
-   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  
 
   return (
     <Map
@@ -70,8 +54,8 @@ function App() {
           <Marker 
             longitude={p.long} 
             latitude={p.lat} 
-            
-           
+            onClick={()=>handleMarkerClick(p._id)}
+           interactive={true}
           >
 
 
@@ -80,13 +64,15 @@ function App() {
 
       
                
+       
 
-
-         
-            <Popup 
+         {p._id === currentPlaceID && (<Popup 
               longitude={p.long} 
               latitude={p.lat} 
-              anchor="bottom">
+              anchor="bottom"
+              closeButton={true}
+                closeOnClick={false}
+                onClose={() => setCurrentPlaceID(0)}>
               <div className="card">
                 <label>Place</label>
                 <h4 className="place">Eiffel Tower</h4>
@@ -95,12 +81,14 @@ function App() {
   
                 <label>
                   Join Nest
+                  <a href="https://syncnest.onrender.com/">
                   <Avatar
                     className="syncNestLogo"
                     alt="SyncNest - Logo"
                     src={require(".//SyncNest.png")}
-                    onClick={()=>openModal(p.lat,p.long)}
                   />
+                    </ a>
+                  
                   <br></br>
                 </label>
   
@@ -117,23 +105,10 @@ function App() {
                 </span>
                 <span className="date">{format(p.createdAt)}</span>
               </div>
-            </Popup> 
+            </Popup> )}
+            
            
-         <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ width: 200 }}>
-          <h2 id="child-modal-title">Text in a child modal</h2>
-          <p id="child-modal-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p>
-         
-        </Box>
-      </Modal>
+       
         
           
         </ >
