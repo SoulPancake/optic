@@ -33,8 +33,12 @@ function App() {
   }, []);
 
   const handleMarkerClick = (id) => {
-    console.log(id);
-    setCurrentPlaceID(id);
+    if ( currentPlaceID === id) {
+      setCurrentPlaceID(0); // Clicking twice on marker should close it again
+    }else{
+      setCurrentPlaceID(id);
+    }
+    
   };
 
   function handleMapClick(e) {
@@ -54,6 +58,7 @@ function App() {
       {pins.map((p) => (
         <>
           <Marker
+            className="pin"
             longitude={p.long}
             latitude={p.lat}
             onClick={() => handleMarkerClick(p._id)}
