@@ -10,7 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 
 function App() {
-  const currentUser = "JohnSnows";
+  const currentUser = "boopenKumar";
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
@@ -131,7 +131,7 @@ console.log(newPin)
 
                 <label>Critical Level</label>
                 <div className="stars">
-                  {Array(p.criticalLevel).fill( <Star className="star" />)}
+                  {Array(p.critical).fill( <Star className="star" />)}
                  
              
                 </div>
