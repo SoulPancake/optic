@@ -79,5 +79,5 @@ input::placeholder,textarea::placeholder{
     text-shadow: black;
     width: 80%;
     margin-left: auto;
-    
+    cursor: pointer;
 }

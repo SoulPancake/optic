@@ -5,7 +5,7 @@ dotenv.config();
 const app = express();
 const pinRoute = require("./routes/pins");
 const userRoute = require("./routes/users");
-
+// The email used is the outlook one
 app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URL, {

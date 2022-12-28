@@ -46,5 +46,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8800/api"
+  "proxy": {
+    "/": {
+      "target": "http://localhost:8800/api",
+      "changeOrigin": true,
+      "secure": false
+    }
+  }
 }

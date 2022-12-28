@@ -10,10 +10,14 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 
 function App() {
-  const currentUser = "JohnSnow";
+  const currentUser = "JohnSnows";
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [missionType, setMissionType] = useState(null);
+  const [missionDesc, setMissionDesc] = useState(null);
+  const [criticalLevel, setCriticalLevel] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -56,6 +60,28 @@ function App() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPin = {
+      username: currentUser,
+      title: title,
+      type: missionType,
+      description:missionDesc,
+      critical:criticalLevel,
+      lat: newPlace.lat,
+      long: newPlace.long
+    };
+console.log(newPin)
+    try {
+      const res = await axios.post("/pins", newPin);
+      console.log("Response is" ,res)
+      setPins([...pins, res.data]);
+      setNewPlace(null); // Dismissing form popup
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Map
       initialViewState={viewstate}
@@ -87,7 +113,7 @@ function App() {
             >
               <div className="card">
                 <label>Place</label>
-                <h4 className="place">Eiffel Tower</h4>
+                <h4 className="place">{p.title}</h4>
                 <label>Type</label>
                 <p className="desc">{p.description}</p>
 
@@ -105,10 +131,9 @@ function App() {
 
                 <label>Critical Level</label>
                 <div className="stars">
-                  <Star className="star" />
-                  <Star className="star" />
-                  <Star className="star" />
-                  <Star className="star" />
+                  {Array(p.criticalLevel).fill( <Star className="star" />)}
+                 
+             
                 </div>
                 <label>Information </label>
                 <span className="username">
@@ -131,29 +156,35 @@ function App() {
           onClose={() => setNewPlace(null)}
         >
           <div>
-                <form>
-                  <label>Title</label>
-                  <input
-                    placeholder="Enter a title"
-                    
-                  />
-                  <label>Type</label>
-                  <textarea
-                    placeholder="Tell us something about this Op."
-                  />
-                  <label>Critical Level</label>
-                  <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <button type="submit" className="submitButton">
-                    Add Pin
-                  </button>
-                </form>
-              </div>
+            <form onSubmit={handleSubmit}>
+              <label>Title</label>
+              <input
+                placeholder="Enter a title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label>Type</label>
+              <textarea
+                placeholder="Mission type"
+                onChange={(e) => setMissionType(e.target.value)}
+              />
+                            <label>Description</label>
+              <textarea
+                placeholder="Add Mission Description"
+                onChange={(e) => setMissionDesc(e.target.value)}
+              />
+              <label>Critical Level</label>
+              <select onChange={(e) => setCriticalLevel(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button type="submit" className="submitButton">
+                Add Pin
+              </button>
+            </form>
+          </div>
         </Popup>
       )}
     </Map>
