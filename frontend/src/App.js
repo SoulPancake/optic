@@ -10,7 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 
 function App() {
-  const currentUser = "Jane";
+  const currentUser = "JohnSnow";
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
@@ -71,7 +71,7 @@ function App() {
             className="pin"
             longitude={p.long}
             latitude={p.lat}
-            color={p.username === currentUser ? "green" : "#e11e73"}
+            color={p.username == currentUser ? "teal" : "#e11e73"}
             onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
             interactive={true}
           ></Marker>
@@ -130,7 +130,11 @@ function App() {
           anchor={"top"}
           onClose={() => setNewPlace(null)}
         >
-          hello
+          <div>
+            <form>
+
+            </form>
+          </div>
         </Popup>
       )}
     </Map>
