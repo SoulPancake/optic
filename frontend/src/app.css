@@ -1,3 +1,4 @@
+
 .card{
     width: 200px;
     height: fit-content;
@@ -80,4 +81,34 @@ input::placeholder,textarea::placeholder{
     width: 80%;
     margin-left: auto;
     cursor: pointer;
+}
+
+.button{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    z-index: 100000000;
+    position: absolute;
+    left: 90%;
+    top: 2%;
+}
+
+.logout{
+    background-color: tomato;
+}
+
+.login{
+    background-color: teal;
+}
+
+.register{
+    background-color: slateblue;
+}
+
+.opticLogo{
+    position: absolute;
+    width: 19%;
+    height: auto;
+    left: 79%;
 }

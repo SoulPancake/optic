@@ -10,7 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 
 function App() {
-  const currentUser = "boopenKumar";
+  const currentUser = null;
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
@@ -66,15 +66,15 @@ function App() {
       username: currentUser,
       title: title,
       type: missionType,
-      description:missionDesc,
-      critical:criticalLevel,
+      description: missionDesc,
+      critical: criticalLevel,
       lat: newPlace.lat,
-      long: newPlace.long
+      long: newPlace.long,
     };
-console.log(newPin)
+    console.log(newPin);
     try {
       const res = await axios.post("/pins", newPin);
-      console.log("Response is" ,res)
+      console.log("Response is", res);
       setPins([...pins, res.data]);
       setNewPlace(null); // Dismissing form popup
     } catch (err) {
@@ -83,111 +83,122 @@ console.log(newPin)
   };
 
   return (
-    <Map
-      initialViewState={viewstate}
-      mapboxAccessToken={process.env.REACT_APP_MAPBOX}
-      style={{ width: "100vw", height: "100vh" }}
-      mapStyle="mapbox://styles/mapbox/navigation-night-v1"
-      onMove={(nextViewstate) => setViewstate(nextViewstate)}
-      onDblClick={handleAddClick}
-    >
-      {pins.map((p) => (
-        <>
-          <Marker
-            className="pin"
-            longitude={p.long}
-            latitude={p.lat}
-            color={p.username == currentUser ? "teal" : "#e11e73"}
-            onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
-            interactive={true}
-          ></Marker>
 
-          {p._id === currentPlaceID && (
-            <Popup
+      <Map
+        initialViewState={viewstate}
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX}
+        style={{ width: "100vw", height: "100vh" }}
+        mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+        onMove={(nextViewstate) => setViewstate(nextViewstate)}
+        onDblClick={handleAddClick}
+      >
+        <div>
+        <img className="opticLogo" src={require(".//optic.png")} alt="optic logo"></img>
+      </div>
+        {currentUser ? (
+        <button className="button logout">Log out</button>
+      ) : (
+        <div className="buttons">
+          <button className="button login">Login</button>
+          <button className="button register">Register</button>
+        </div>
+      )}
+        {pins.map((p) => (
+          <>
+            <Marker
+              className="pin"
               longitude={p.long}
               latitude={p.lat}
-              anchor="top"
-              closeButton={true}
-              closeOnClick={false}
-              onClose={() => setCurrentPlaceID(0)}
-            >
-              <div className="card">
-                <label>Place</label>
-                <h4 className="place">{p.title}</h4>
-                <label>Type</label>
-                <p className="desc">{p.description}</p>
+              color={p.username == currentUser ? "teal" : "#e11e73"}
+              onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+              interactive={true}
+            ></Marker>
 
-                <label>
-                  Join Nest
-                  <a href="https://syncnest.onrender.com/">
-                    <Avatar
-                      className="syncNestLogo"
-                      alt="SyncNest - Logo"
-                      src={require(".//SyncNest.png")}
-                    />
-                  </a>
-                  <br></br>
-                </label>
+            {p._id === currentPlaceID && (
+              <Popup
+                longitude={p.long}
+                latitude={p.lat}
+                anchor="top"
+                closeButton={true}
+                closeOnClick={false}
+                onClose={() => setCurrentPlaceID(0)}
+              >
+                <div className="card">
+                  <label>Place</label>
+                  <h4 className="place">{p.title}</h4>
+                  <label>Type</label>
+                  <p className="desc">{p.description}</p>
 
-                <label>Critical Level</label>
-                <div className="stars">
-                  {Array(p.critical).fill( <Star className="star" />)}
-                 
-             
+                  <label>
+                    Join Nest
+                    <a href="https://syncnest.onrender.com/">
+                      <Avatar
+                        className="syncNestLogo"
+                        alt="SyncNest - Logo"
+                        src={require(".//SyncNest.png")}
+                      />
+                    </a>
+                    <br></br>
+                  </label>
+
+                  <label>Critical Level</label>
+                  <div className="stars">
+                    {Array(p.critical).fill(<Star className="star" />)}
+                  </div>
+                  <label>Information </label>
+                  <span className="username">
+                    Created by <b>{p.username}</b>
+                  </span>
+                  <span className="date">{format(p.createdAt)}</span>
                 </div>
-                <label>Information </label>
-                <span className="username">
-                  Created by <b>{p.username}</b>
-                </span>
-                <span className="date">{format(p.createdAt)}</span>
-              </div>
-            </Popup>
-          )}
-        </>
-      ))}
+              </Popup>
+            )}
+          </>
+        ))}
 
-      {newPlace && (
-        <Popup
-          latitude={newPlace.lat}
-          longitude={newPlace.long}
-          closeButton={true}
-          closeOnClick={true}
-          anchor={"top"}
-          onClose={() => setNewPlace(null)}
-        >
-          <div>
-            <form onSubmit={handleSubmit}>
-              <label>Title</label>
-              <input
-                placeholder="Enter a title"
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <label>Type</label>
-              <textarea
-                placeholder="Mission type"
-                onChange={(e) => setMissionType(e.target.value)}
-              />
-                            <label>Description</label>
-              <textarea
-                placeholder="Add Mission Description"
-                onChange={(e) => setMissionDesc(e.target.value)}
-              />
-              <label>Critical Level</label>
-              <select onChange={(e) => setCriticalLevel(e.target.value)}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <button type="submit" className="submitButton">
-                Add Pin
-              </button>
-            </form>
-          </div>
-        </Popup>
-      )}
-    </Map>
+        {newPlace && (
+          <Popup
+            latitude={newPlace.lat}
+            longitude={newPlace.long}
+            closeButton={true}
+            closeOnClick={true}
+            anchor={"top"}
+            onClose={() => setNewPlace(null)}
+          >
+            <div>
+              <form onSubmit={handleSubmit}>
+                <label>Title</label>
+                <input
+                  placeholder="Enter a title"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <label>Type</label>
+                <textarea
+                  placeholder="Mission type"
+                  onChange={(e) => setMissionType(e.target.value)}
+                />
+                <label>Description</label>
+                <textarea
+                  placeholder="Add Mission Description"
+                  onChange={(e) => setMissionDesc(e.target.value)}
+                />
+                <label>Critical Level</label>
+                <select onChange={(e) => setCriticalLevel(e.target.value)}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button type="submit" className="submitButton">
+                  Add Pin
+                </button>
+              </form>
+            </div>
+          </Popup>
+        )}
+      </Map>
+    
   );
 }
 
