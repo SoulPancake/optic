@@ -84,31 +84,54 @@ input::placeholder,textarea::placeholder{
 }
 
 .button{
-    border: none;
+    border: 10px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
+    width:80px;
     color: white;
-    z-index: 100000000;
-    position: absolute;
     left: 90%;
     top: 2%;
 }
 
 .logout{
     background-color: tomato;
+    width: fit-content;
+}
+
+.logout:hover{
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .login{
-    background-color: teal;
+    background-color: tomato;
+    margin-right: 10px;
+}
+
+.login:hover{
+    border-radius: 10px;
 }
 
 .register{
-    background-color: slateblue;
+    background-color: yellowgreen;
+}
+
+.register:hover{
+    border-radius: 10px;
 }
 
 .opticLogo{
     position: absolute;
     width: 19%;
     height: auto;
-    left: 79%;
+    left: 80%;
+}
+
+.buttons,.logout{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 10px;
+    right: 50px;
 }

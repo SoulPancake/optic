@@ -8,9 +8,10 @@ import "./app.css";
 import Avatar from "@material-ui/core/Avatar";
 
 import { format } from "timeago.js";
+import Register from "./components/Register";
 
 function App() {
-  const currentUser = null;
+  const [currentUser,setCurrentUser] = useState(null);
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
@@ -96,7 +97,7 @@ function App() {
         <img className="opticLogo" src={require(".//optic.png")} alt="optic logo"></img>
       </div>
         {currentUser ? (
-        <button className="button logout">Log out</button>
+        <button className="button logout">&nbsp;Log out&nbsp;</button>
       ) : (
         <div className="buttons">
           <button className="button login">Login</button>
@@ -197,6 +198,7 @@ function App() {
             </div>
           </Popup>
         )}
+        <Register></Register>
       </Map>
     
   );
