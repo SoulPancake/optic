@@ -13,7 +13,7 @@ function App() {
   const currentUser = "Jane"
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
-  const [ newPlace,setNewPlace] = useState(null)
+  const [newPlace,setNewPlace] = useState(null);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -40,16 +40,16 @@ function App() {
     }else{
       setCurrentPlaceID(id);
     }
-    
   };
 
   const handleAddClick = (e) =>{
-    const [ long,lat] = e.lngLat;
+    const long= e.lngLat.lng;
+    const lat = e.lngLat.lat;
     setNewPlace({
       lat,
       long
-    })
-  }
+    });
+  };
 
 
   return (
@@ -116,6 +116,16 @@ function App() {
           )}
         </>
       ))}
+
+      {newPlace && (<Popup
+      latitude={newPlace.lat}
+      longitude={newPlace.long}
+      closeButton={true}
+      closeOnClick={true}
+      anchor={"top"}
+      onClose={()=>setCurrentPlaceID(0)}>
+        hello
+      </Popup>)}
     </Map>
   );
 }
