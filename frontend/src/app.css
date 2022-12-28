@@ -42,3 +42,42 @@ username{
 date{
     font-size: 7px;
 }
+
+form{
+    width:fit-content;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input{
+    border:none;
+    border-bottom: 1px;
+}
+textarea{
+    color: teal;
+}
+input::placeholder,textarea::placeholder{
+    font-size: 10px;
+
+}
+
+.submitButton{
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: teal;
+    transition: width 4s;
+}
+
+.submitButton:hover{
+    animation-duration:1000;
+    background: #024a4a;;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    text-shadow: black;
+    width: 80%;
+    margin-left: auto;
+    
+}

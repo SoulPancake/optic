@@ -131,10 +131,29 @@ function App() {
           onClose={() => setNewPlace(null)}
         >
           <div>
-            <form>
-
-            </form>
-          </div>
+                <form>
+                  <label>Title</label>
+                  <input
+                    placeholder="Enter a title"
+                    
+                  />
+                  <label>Type</label>
+                  <textarea
+                    placeholder="Tell us something about this Op."
+                  />
+                  <label>Critical Level</label>
+                  <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <button type="submit" className="submitButton">
+                    Add Pin
+                  </button>
+                </form>
+              </div>
         </Popup>
       )}
     </Map>
