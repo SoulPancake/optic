@@ -10,10 +10,10 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 
 function App() {
-  const currentUser = "Jane"
+  const currentUser = "Jane";
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
-  const [newPlace,setNewPlace] = useState(null);
+  const [newPlace, setNewPlace] = useState(null);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
     height: "100vh",
@@ -34,23 +34,27 @@ function App() {
     getPins();
   }, []);
 
-  const handleMarkerClick = (id) => {
-    if ( currentPlaceID === id) {
+  const handleMarkerClick = (id, lat, long) => {
+    setViewstate({
+      ...viewstate,
+      latitude: lat,
+      longitude: long,
+    });
+    if (currentPlaceID === id) {
       setCurrentPlaceID(0); // Clicking twice on marker should close it again
-    }else{
+    } else {
       setCurrentPlaceID(id);
     }
   };
 
-  const handleAddClick = (e) =>{
-    const long= e.lngLat.lng;
+  const handleAddClick = (e) => {
+    const long = e.lngLat.lng;
     const lat = e.lngLat.lat;
     setNewPlace({
       lat,
-      long
+      long,
     });
   };
-
 
   return (
     <Map
@@ -67,8 +71,8 @@ function App() {
             className="pin"
             longitude={p.long}
             latitude={p.lat}
-            color={p.username===currentUser?"green":"#e11e73"}
-            onClick={() => handleMarkerClick(p._id)}
+            color={p.username === currentUser ? "green" : "#e11e73"}
+            onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
             interactive={true}
           ></Marker>
 
@@ -117,15 +121,18 @@ function App() {
         </>
       ))}
 
-      {newPlace && (<Popup
-      latitude={newPlace.lat}
-      longitude={newPlace.long}
-      closeButton={true}
-      closeOnClick={true}
-      anchor={"top"}
-      onClose={()=>setNewPlace(null)}>
-        hello
-      </Popup>)}
+      {newPlace && (
+        <Popup
+          latitude={newPlace.lat}
+          longitude={newPlace.long}
+          closeButton={true}
+          closeOnClick={true}
+          anchor={"top"}
+          onClose={() => setNewPlace(null)}
+        >
+          hello
+        </Popup>
+      )}
     </Map>
   );
 }
