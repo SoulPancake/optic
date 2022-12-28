@@ -123,7 +123,7 @@ function App() {
       closeButton={true}
       closeOnClick={true}
       anchor={"top"}
-      onClose={()=>setCurrentPlaceID(0)}>
+      onClose={()=>setNewPlace(null)}>
         hello
       </Popup>)}
     </Map>
