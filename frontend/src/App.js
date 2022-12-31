@@ -12,7 +12,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 
 import DrawControl from "./components/draw-control";
-import ControlPanel from "./components/control-panel.jsx";
+import ControlPanel from "./components/control-panel";
 
 function App() {
   const myStorage = window.localStorage;
@@ -116,12 +116,11 @@ function App() {
     window.location.reload();
   };
 
-
   const [features, setFeatures] = useState({});
 
   const onUpdate = (e) => {
-    setFeatures(currFeatures => {
-      const newFeatures = {...currFeatures};
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
       for (const f of e.features) {
         newFeatures[f.id] = f;
       }
@@ -129,9 +128,9 @@ function App() {
     });
   };
 
-  const onDelete =(e) => {
-    setFeatures(currFeatures => {
-      const newFeatures = {...currFeatures};
+  const onDelete = (e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
       for (const f of e.features) {
         delete newFeatures[f.id];
       }
@@ -270,21 +269,26 @@ function App() {
             </div>
           </Popup>
         )}
-        {currentUser && <DrawControl
-          position="top-left"
-          displayControlsDefault={false}
-          controls={{
-            polygon: true,
-            trash: true
-          }}
-          defaultMode="draw_polygon"
-          onCreate={onUpdate}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />}
-        
+        {currentUser && (
+          <DrawControl
+            position="top-left"
+            displayControlsDefault={false}
+            controls={{
+              polygon: {
+                icon: "circle",
+              },
+              trash: {
+                icon: "square",
+              },
+            }}
+            defaultMode="draw_polygon"
+            onCreate={onUpdate}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        )}
       </Map>
-      {currentUser && <ControlPanel polygons={Object.values(features)} /> } 
+      {currentUser && <ControlPanel polygons={Object.values(features)} />}
       {showRegister && <Register setShowRegister={setShowRegister}></Register>}
       {showLogin && (
         <Login
