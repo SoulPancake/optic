@@ -9,15 +9,20 @@ import Avatar from "@material-ui/core/Avatar";
 
 import { format } from "timeago.js";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
-  const [currentUser,setCurrentUser] = useState(null);
+  const myStorage = window.localStorage;
+  const [currentUser,setCurrentUser] = useState(myStorage.getItem("user"));
+  const [scale,setScale] = useState(1);
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
   const [missionType, setMissionType] = useState(null);
   const [missionDesc, setMissionDesc] = useState(null);
+  const [ showRegister,setShowRegister] = useState(false);
+  const [ showLogin, setShowLogin] = useState(false); 
   const [criticalLevel, setCriticalLevel] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
@@ -52,6 +57,26 @@ function App() {
     }
   };
 
+  const handleHover = (event) => {
+    console.log("Hovering")
+    setScale(1.5);
+  };
+
+ setTimeout(()=>{
+  if(showRegister||showLogin) {
+    document.getElementsByClassName("mapboxgl-map")[0].style.filter = "blur(4px)";
+  }else{
+    document.getElementsByClassName("mapboxgl-map")[0].style.filter = "none";
+  }
+ 
+ },100)
+    
+  
+
+  const handleLeave = (event) => {
+    setScale(1);
+  };
+
   const handleAddClick = (e) => {
     const long = e.lngLat.lng;
     const lat = e.lngLat.lat;
@@ -83,8 +108,13 @@ function App() {
     }
   };
 
-  return (
+  const handleLogout = (event) =>{
+     myStorage.removeItem("user");
+     setCurrentUser(null);
+  }
 
+  return (
+<>
       <Map
         initialViewState={viewstate}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
@@ -97,11 +127,11 @@ function App() {
         <img className="opticLogo" src={require(".//optic.png")} alt="optic logo"></img>
       </div>
         {currentUser ? (
-        <button className="button logout">&nbsp;Log out&nbsp;</button>
+        <button className="button logout" onClick={()=>handleLogout()}>&nbsp;Log out&nbsp;</button>
       ) : (
         <div className="buttons">
-          <button className="button login">Login</button>
-          <button className="button register">Register</button>
+          <button className="button login" onClick={()=>setShowLogin(true)}>Login</button>
+          <button className="button register" onClick={()=>setShowRegister(true)}>Register</button>
         </div>
       )}
         {pins.map((p) => (
@@ -113,6 +143,9 @@ function App() {
               color={p.username == currentUser ? "teal" : "#e11e73"}
               onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
               interactive={true}
+              onHover={handleHover}
+              onLeave={handleLeave}
+              scale={scale}
             ></Marker>
 
             {p._id === currentPlaceID && (
@@ -198,8 +231,11 @@ function App() {
             </div>
           </Popup>
         )}
-        <Register></Register>
+        
       </Map>
+      {showRegister && <Register setShowRegister={setShowRegister} ></Register>}
+      {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setCurrentUser={setCurrentUser}></Login>}
+      </>
     
   );
 }

@@ -7,7 +7,7 @@
     justify-content: space-around;
 }
 
-.pin{
+.pin:hover{
     cursor: crosshair;
 }
 
@@ -38,6 +38,10 @@ star{
 
 username{
     font-size: 12px;
+}
+
+.blur{
+    filter: blur(4px);
 }
 
 date{
@@ -122,7 +126,7 @@ input::placeholder,textarea::placeholder{
 
 .opticLogo{
     position: absolute;
-    width: 19%;
+    width: 15%;
     height: auto;
     left: 80%;
 }
