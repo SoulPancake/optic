@@ -126,9 +126,10 @@ input::placeholder,textarea::placeholder{
 
 .opticLogo{
     position: absolute;
-    width: 15%;
+    width: 10%;
     height: auto;
-    left: 80%;
+    left: 87%;
+    opacity: 85%;
 }
 
 .buttons,.logout{

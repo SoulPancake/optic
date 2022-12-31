@@ -32,7 +32,7 @@ export default function Register({setShowRegister}) {
             
 
             <div className="logo">
-                <img src={require(".//logo.png")} alt="optic logo"></img>
+                <img src={require(".//logo2.png")} alt="optic logo"></img>
             </div>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="username" ref={nameRef}></input>

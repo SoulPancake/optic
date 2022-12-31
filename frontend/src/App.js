@@ -110,6 +110,7 @@ function App() {
   const handleLogout = (event) => {
     myStorage.removeItem("user");
     setCurrentUser(null);
+    window.location.reload();
   };
 
   return (
@@ -125,7 +126,7 @@ function App() {
         <div>
           <img
             className="opticLogo"
-            src={require(".//optic.png")}
+            src={require(".//logo.png")}
             alt="optic logo"
           ></img>
         </div>
