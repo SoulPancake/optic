@@ -13,16 +13,16 @@ import Login from "./components/Login";
 
 function App() {
   const myStorage = window.localStorage;
-  const [currentUser,setCurrentUser] = useState(myStorage.getItem("user"));
-  const [scale,setScale] = useState(1);
+  const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
+  const [scale, setScale] = useState(1);
   const [pins, setPins] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(0);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
   const [missionType, setMissionType] = useState(null);
   const [missionDesc, setMissionDesc] = useState(null);
-  const [ showRegister,setShowRegister] = useState(false);
-  const [ showLogin, setShowLogin] = useState(false); 
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [criticalLevel, setCriticalLevel] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
@@ -58,20 +58,18 @@ function App() {
   };
 
   const handleHover = (event) => {
-    console.log("Hovering")
+    console.log("Hovering");
     setScale(1.5);
   };
 
- setTimeout(()=>{
-  if(showRegister||showLogin) {
-    document.getElementsByClassName("mapboxgl-map")[0].style.filter = "blur(4px)";
-  }else{
-    document.getElementsByClassName("mapboxgl-map")[0].style.filter = "none";
-  }
- 
- },100)
-    
-  
+  setTimeout(() => {
+    if (showRegister || showLogin) {
+      document.getElementsByClassName("mapboxgl-map")[0].style.filter =
+        "blur(4px)";
+    } else {
+      document.getElementsByClassName("mapboxgl-map")[0].style.filter = "none";
+    }
+  }, 100);
 
   const handleLeave = (event) => {
     setScale(1);
@@ -88,7 +86,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!currentUser)return; // We don't want un-logged users to create Mission Pins
+    if (!currentUser) return; // We don't want un-logged users to create Mission Pins
     const newPin = {
       username: currentUser,
       title: title,
@@ -109,13 +107,13 @@ function App() {
     }
   };
 
-  const handleLogout = (event) =>{
-     myStorage.removeItem("user");
-     setCurrentUser(null);
-  }
+  const handleLogout = (event) => {
+    myStorage.removeItem("user");
+    setCurrentUser(null);
+  };
 
   return (
-<>
+    <>
       <Map
         initialViewState={viewstate}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
@@ -125,16 +123,29 @@ function App() {
         onDblClick={handleAddClick}
       >
         <div>
-        <img className="opticLogo" src={require(".//optic.png")} alt="optic logo"></img>
-      </div>
-        {currentUser ? (
-        <button className="button logout" onClick={()=>handleLogout()}>&nbsp;Log out&nbsp;</button>
-      ) : (
-        <div className="buttons">
-          <button className="button login" onClick={()=>setShowLogin(true)}>Login</button>
-          <button className="button register" onClick={()=>setShowRegister(true)}>Register</button>
+          <img
+            className="opticLogo"
+            src={require(".//optic.png")}
+            alt="optic logo"
+          ></img>
         </div>
-      )}
+        {currentUser ? (
+          <button className="button logout" onClick={() => handleLogout()}>
+            &nbsp;Log out&nbsp;
+          </button>
+        ) : (
+          <div className="buttons">
+            <button className="button login" onClick={() => setShowLogin(true)}>
+              Login
+            </button>
+            <button
+              className="button register"
+              onClick={() => setShowRegister(true)}
+            >
+              Register
+            </button>
+          </div>
+        )}
         {pins.map((p) => (
           <>
             <Marker
@@ -232,12 +243,16 @@ function App() {
             </div>
           </Popup>
         )}
-        
       </Map>
-      {showRegister && <Register setShowRegister={setShowRegister} ></Register>}
-      {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setCurrentUser={setCurrentUser}></Login>}
-      </>
-    
+      {showRegister && <Register setShowRegister={setShowRegister}></Register>}
+      {showLogin && (
+        <Login
+          setShowLogin={setShowLogin}
+          myStorage={myStorage}
+          setCurrentUser={setCurrentUser}
+        ></Login>
+      )}
+    </>
   );
 }
 
