@@ -88,6 +88,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!currentUser)return; // We don't want un-logged users to create Mission Pins
     const newPin = {
       username: currentUser,
       title: title,
@@ -190,7 +191,7 @@ function App() {
           </>
         ))}
 
-        {newPlace && (
+        {newPlace && currentUser && (
           <Popup
             latitude={newPlace.lat}
             longitude={newPlace.long}
