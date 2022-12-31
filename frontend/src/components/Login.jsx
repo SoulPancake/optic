@@ -10,16 +10,21 @@ export default function Register({setShowLogin,myStorage,setCurrentUser}) {
     const nameRef = useRef();
     const passwordRef = useRef();
     const handleSubmit =async (e) =>{
+        e.preventDefault();
         const newUser = {
             username: nameRef.current.value,
-            password:passwordRef.current.value
+            password: passwordRef.current.value
         }
         try{
             const res = await axios.post("/users/login",newUser);
-            myStorage.setItem("user",res.data.username);
+            console.log(res.data)
             setCurrentUser(res.data.username);
+            myStorage.setItem('user',res.data.username);
+            console.log("User name",res.data.username);
+            console.log("Local storage",myStorage.getItem('user'));
+            
             setShowLogin(false);
-            setFailure(false);
+            // window.location.reload();
         }catch(e){
             setFailure(true);
             console.log(e);
