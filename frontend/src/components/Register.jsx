@@ -19,7 +19,7 @@ export default function Register({setShowRegister}) {
             password:passwordRef.current.value
         }
         try{
-            await axios.post("/users/register",newUser);
+            await axios.post("https://optic-mongo.onrender.com/api/users/register",newUser);
             setFailure(false);
             setSuccess(true);
         }catch(e){

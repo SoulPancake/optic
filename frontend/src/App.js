@@ -35,7 +35,7 @@ function App() {
   React.useEffect(() => {
     const getPins = async () => {
       try {
-        const res = await axios.get("/pins");
+        const res = await axios.get("https://optic-mongo.onrender.com/api/pins");
         setPins(res.data);
       } catch (err) {
         console.log(err);
@@ -98,7 +98,7 @@ function App() {
     };
     console.log(newPin);
     try {
-      const res = await axios.post("/pins", newPin);
+      const res = await axios.post("https://optic-mongo.onrender.com/api/pins", newPin);
       console.log("Response is", res);
       setPins([...pins, res.data]);
       setNewPlace(null); // Dismissing form popup

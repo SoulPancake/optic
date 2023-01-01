@@ -16,7 +16,7 @@ export default function Register({setShowLogin,myStorage,setCurrentUser}) {
             password: passwordRef.current.value
         }
         try{
-            const res = await axios.post("/users/login",newUser);
+            const res = await axios.post("https://optic-mongo.onrender.com/api/users/login",newUser);
             console.log(res.data)
             setCurrentUser(res.data.username);
             myStorage.setItem('user',res.data.username);
