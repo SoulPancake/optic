@@ -212,7 +212,14 @@ function App() {
                     </a>
                     <br></br>
                   </label>
-
+<label>
+  Analyse Threats
+  <Avatar
+                        className="threatLogo"
+                        alt="Analyse Threat"
+                        src={require(".//threat.png")}
+                      />
+</label>
                   <label>Critical Level</label>
                   <div className="stars">
                     {Array(p.critical).fill(<Star className="star" />)}
