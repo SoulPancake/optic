@@ -1,5 +1,5 @@
 # Optic - Map Mission Management system
-![logo](https://user-images.githubusercontent.com/70265851/212692664-f3f4c607-271f-4de1-9b53-fea4b095782d.png)
+![logo](https://user-images.githubusercontent.com/70265851/212693022-ffd47809-0717-4037-83cc-f454be74b5dd.png)
 
 # Backend using NodeJS
 # Frontend using ReactJS
