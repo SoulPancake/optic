@@ -1,5 +1,4 @@
-import React, {useState }from "react";
-import { useRef } from "react";
+import React from "react";
 import "./threatContainer.css"
 import { Cancel } from "@material-ui/icons";
 

@@ -10,7 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import ThreatModal from "./components/ThreatModal"
+import ThreatModal from "./components/ThreatModal";
 
 import DrawControl from "./components/draw-control";
 import ControlPanel from "./components/control-panel";
