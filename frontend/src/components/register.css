@@ -29,6 +29,10 @@ input{
     border-radius: 5px;
 }
 
+.analysisBox{
+    height: 220px;
+    width: 490px;
+}
 .registerBtn{
     border: none;
     padding: 5px;

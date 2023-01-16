@@ -1,0 +1,61 @@
+.threatContainer{
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+    border-radius: 20px;
+    border-width: 10px;
+    border-color: rgb(254, 254, 254);
+    background-color: rgb(1, 75, 75);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 85%;
+}
+
+img{
+    height:100px;
+    width: 100px;
+}
+
+input{
+    border: none;
+    border-radius: 5px;
+}
+
+.registerBtn{
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    color:white;
+    background-color: tomato;
+    cursor: pointer;
+}
+
+
+.logo{
+    margin-top: 10px;
+}
+
+.threatCancel{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.ThreatAnalysis{
+  position: relative;
+  margin-bottom: auto; 
+}
+
+.analysisBox{
+    overflow: scroll;
+}

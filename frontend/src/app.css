@@ -32,6 +32,12 @@ syncNestLogo{
     size-adjust: 50%;
 }
 
+threatLogo{
+    border-top: 1px;
+    border-bottom: 1px;
+    size-adjust: 50%;
+}
+
 star{
     color:grey;
 }
