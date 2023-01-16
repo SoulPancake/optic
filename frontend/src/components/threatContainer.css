@@ -1,6 +1,6 @@
-.registerContainer{
-    width: 300px;
-    height: 250px;
+.threatContainer{
+    width: 500px;
+    height: 500px;
     padding: 10px;
     border-radius: 20px;
     border-width: 10px;
@@ -29,10 +29,6 @@ input{
     border-radius: 5px;
 }
 
-.analysisBox{
-    height: 220px;
-    width: 490px;
-}
 .registerBtn{
     border: none;
     padding: 5px;
@@ -42,27 +38,24 @@ input{
     cursor: pointer;
 }
 
-.success{
-    color: white;
-    font-size: 12px;
-text-align: center;
-}
-
-.failure{
-    color: white;
-    font-size: 12px;
-text-align: center;
-}
 
 .logo{
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
-.registerCancel{
+.threatCancel{
     position: absolute;
     top: 5px;
     right: 8px;
     color: aliceblue;
     cursor: pointer;
+}
+
+.ThreatAnalysis{
+  position: relative;
+  margin-bottom: auto; 
+}
+
+.analysisBox{
+    overflow: scroll;
 }

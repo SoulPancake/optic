@@ -10,6 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { format } from "timeago.js";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import ThreatModal from "./components/ThreatModal"
 
 import DrawControl from "./components/draw-control";
 import ControlPanel from "./components/control-panel";
@@ -26,6 +27,7 @@ function App() {
   const [missionDesc, setMissionDesc] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showThreatModal, setShowThreatModal] = useState(false);
   const [criticalLevel, setCriticalLevel] = useState(0);
   const [viewstate, setViewstate] = useState({
     width: "100vw",
@@ -66,7 +68,7 @@ function App() {
   };
 
   setTimeout(() => {
-    if (showRegister || showLogin) {
+    if (showRegister || showLogin || showThreatModal) {
       document.getElementsByClassName("mapboxgl-map")[0].style.filter =
         "blur(4px)";
     } else {
@@ -216,6 +218,7 @@ function App() {
   Analyse Threats
   <Avatar
                         className="threatLogo"
+                        onClick={() => setShowThreatModal(true)}
                         alt="Analyse Threat"
                         src={require(".//threat.png")}
                       />
@@ -304,6 +307,7 @@ function App() {
           setCurrentUser={setCurrentUser}
         ></Login>
       )}
+      {showThreatModal&& (<ThreatModal setShowThreatModal={setShowThreatModal}/>)}
     </>
   );
 }
