@@ -11,6 +11,9 @@ import { format } from "timeago.js";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
+import DrawControl from "./components/draw-control";
+import ControlPanel from "./components/control-panel";
+
 function App() {
   const myStorage = window.localStorage;
   const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
@@ -111,6 +114,28 @@ function App() {
     myStorage.removeItem("user");
     setCurrentUser(null);
     window.location.reload();
+  };
+
+  const [features, setFeatures] = useState({});
+
+  const onUpdate = (e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        newFeatures[f.id] = f;
+      }
+      return newFeatures;
+    });
+  };
+
+  const onDelete = (e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        delete newFeatures[f.id];
+      }
+      return newFeatures;
+    });
   };
 
   return (
@@ -244,7 +269,26 @@ function App() {
             </div>
           </Popup>
         )}
+        {currentUser && (
+          <DrawControl
+            position="top-left"
+            displayControlsDefault={false}
+            controls={{
+              polygon: {
+                icon: "circle",
+              },
+              trash: {
+                icon: "square",
+              },
+            }}
+            defaultMode="draw_polygon"
+            onCreate={onUpdate}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        )}
       </Map>
+      {currentUser && <ControlPanel polygons={Object.values(features)} />}
       {showRegister && <Register setShowRegister={setShowRegister}></Register>}
       {showLogin && (
         <Login
