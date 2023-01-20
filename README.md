@@ -15,7 +15,7 @@ One of the key features of Optic is the use of pins to denote specific missions 
 
 
 
-![image](https://user-images.githubusercontent.com/70265851/213220196-ffe19585-15c7-4551-bc6c-50b55aa09b45.png)
+![image](https://user-images.githubusercontent.com/70265851/213754664-4986550a-f6dd-4a9e-9b7a-46149ea0b571.png)
 
 Creating a new mission pin : 
 ![image](https://user-images.githubusercontent.com/70265851/213221783-e4d6ee06-152d-49b3-86bd-6a4a232bf7c1.png)
