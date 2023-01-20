@@ -9,7 +9,7 @@ Optic is a full stack web application that combines my skills in React, MapBox, 
 ![image](https://user-images.githubusercontent.com/70265851/213219933-00f102d1-5f79-48e7-adbc-111104ad91ea.png)
 
 One of the key features of Optic is the use of pins to denote specific missions on the map region. These pins, or markers, allow users to easily identify and prioritize key areas on the map, and are inspired by the strategic cross-combatant command collaboration tool, Cosmos. Users can view and add pins to the map, and the pins are color-coded based on the user's login status and pin ownership. Optic also includes a login and authentication system to ensure that only authorized users have access to the pin management features.
-![image](https://user-images.githubusercontent.com/70265851/213221562-072cd5f9-a725-480c-aa88-7cfbd3a98169.png)
+![image](https://user-images.githubusercontent.com/70265851/213753548-70057ec0-a257-410c-bb4c-5169812a6b0d.png)
 
 ![image](https://user-images.githubusercontent.com/70265851/213221471-d823c18e-b1b0-402a-8535-51db13ffc76b.png)
 
