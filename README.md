@@ -14,9 +14,9 @@ One of the key features of Optic is the use of pins to denote specific missions 
 ![image](https://user-images.githubusercontent.com/70265851/213753548-70057ec0-a257-410c-bb4c-5169812a6b0d.png)
 
 
-
+ <br>
 ![image](https://user-images.githubusercontent.com/70265851/213754664-4986550a-f6dd-4a9e-9b7a-46149ea0b571.png)
- <br> <br> <br> <br> <br> <br>
+ <br> <br> <br> <br>
 Creating a new mission pin :  <br> <br> <br> <br>
 ![image](https://user-images.githubusercontent.com/70265851/213221783-e4d6ee06-152d-49b3-86bd-6a4a232bf7c1.png)
  <br> <br>
@@ -25,7 +25,7 @@ Marking critical regions in the map using polygon overlays: <br> <br> <br>
  <br> <br> <br>
 
 
-In addition to the mission management and communication features, Optic is also integrated with Nests, which are synchronised communication rooms powered by sockets. This is an actual integration with SyncNest, which is other my code collaboration project tool built with Express and Socket.io. This integration allows for real-time collaboration and communication among team members, and is inspired by the operational level global all-domain awareness tool, Gaia. <br>
+In addition to the mission management and communication features, Optic is also integrated with Nests, which are synchronised communication rooms powered by sockets. This is an actual integration with SyncNest, which is other my code collaboration project tool built with Express and Socket.io. This integration allows for real-time collaboration and communication among team members, and is inspired by the operational level global all-domain awareness tool, Gaia. <br> <br> <br>
 ![image](https://user-images.githubusercontent.com/70265851/213221158-1dc4973a-90fb-432c-bdeb-9c6de9566263.png)
  <br> <br> <br>
 ![image](https://user-images.githubusercontent.com/70265851/213220918-7b05a640-6bbc-452e-aa57-050bbcb00b98.png)
