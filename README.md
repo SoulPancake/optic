@@ -36,5 +36,4 @@ Optic also includes a threat analysis model that is inspired by Palantir Dossier
 <br>
 # Other in progress items :
 Deriving data ontology by grouping on the basis of usernames or mission pin types or criticality : <br><br>
-![image](https://user-images.githubusercontent.com/70265851/214487271-988b26b6-e841-498b-a390-edc28ccf684a.png)
-
+![image](https://user-images.githubusercontent.com/70265851/214487777-696611d4-fc4c-43f3-8849-231b17d10b6f.png)
