@@ -108,6 +108,14 @@ input::placeholder,textarea::placeholder{
     width: fit-content;
 }
 
+.ontology{
+    left: 20%;
+    top: 94%;
+    position: relative;
+    background-color: tomato;
+    width: fit-content;
+}
+
 .logout:hover{
     border-radius: 10px;
     cursor: pointer;

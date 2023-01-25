@@ -16,6 +16,7 @@ import DrawControl from "./components/draw-control";
 import ControlPanel from "./components/control-panel";
 
 function App() {
+  const mapRef = React.useRef(null);
   const myStorage = window.localStorage;
   const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
   const [scale, setScale] = useState(1);
@@ -36,6 +37,72 @@ function App() {
     longitude: 17,
     zoom: 1,
   });
+
+
+  var coordinates = [[-73.9876, 40.7661], [-73.9879, 40.7669]];
+  var line = {
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "LineString",
+            "coordinates": coordinates
+        }
+    }]
+};
+
+
+
+  function showConnections(){
+    let lineStringCoordinates = []
+    console.log("Function called")
+    const map = mapRef.current.getMap();
+    const id = `line-string-layer-${Date.now()}`;
+    const routeId = `route-${Date.now()}`
+    const usernames = pins.filter(pin => pin.username === currentUser)
+    lineStringCoordinates = usernames.map(pin => [pin.longitude, pin.latitude])
+    map.addLayer({
+      "id": routeId,
+      "type": "line",
+      "source": {
+          "type": "geojson",
+          "data": line
+      },
+      "layout": {
+          "line-join": "round",
+          "line-cap": "round"
+      },
+      "paint": {
+          "line-color": "#888",
+          "line-width": 5
+      }
+  });
+  
+    map.addLayer({
+      id,
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: lineStringCoordinates
+          }
+        }
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#ffcc00',
+        'line-width': 2
+        }
+        });
+        }
+
 
   React.useEffect(() => {
     const getPins = async () => {
@@ -62,6 +129,8 @@ function App() {
     }
   };
 
+
+  
   const handleHover = (event) => {
     console.log("Hovering");
     setScale(1.5);
@@ -143,6 +212,7 @@ function App() {
   return (
     <>
       <Map
+        ref={mapRef}
         initialViewState={viewstate}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
         style={{ width: "100vw", height: "100vh" }}
@@ -173,7 +243,11 @@ function App() {
               Register
             </button>
           </div>
-        )}
+        )}{
+          <button className="button ontology" onClick={() => showConnections()}>
+            &nbsp;View Data Ontology&nbsp;
+          </button>
+        }
         {pins.map((p) => (
           <>
             <Marker
