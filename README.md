@@ -33,7 +33,7 @@ In addition to the mission management and communication features, Optic is also 
 Optic also includes a threat analysis model that is inspired by Palantir Dossier. This model is trained on the Comment Toxicity dataset and runs on a Flask server built on top of a Keras model. It allows users to identify and prioritize potential threats in real-time, making the project suitable for a wide range of mission-critical scenarios. This integration showcases my experience in the domain of NLP and in the vicinity of machine learning tools and technologies, inspired by the threat analysis capabilities provided by Gaia and Cosmos. <br> ( Note : This integration is still work in progress ) <br> <br> <br>
 ![image](https://user-images.githubusercontent.com/70265851/213220483-beaffc88-93d1-4d00-b226-3f46de1a5bc7.png)
 
-<br>
+
 # Other in progress items :
-Deriving data ontology by grouping on the basis of usernames or mission pin types or criticality : <br><br>
+Deriving data ontology by grouping on the basis of usernames or mission pin types or criticality :
 ![image](https://user-images.githubusercontent.com/70265851/214487777-696611d4-fc4c-43f3-8849-231b17d10b6f.png)
