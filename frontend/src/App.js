@@ -243,7 +243,7 @@ function App() {
               Register
             </button>
           </div>
-        )}{
+        )}{currentUser&&
           <button className="button ontology" onClick={() => showConnections()}>
             &nbsp;View Data Ontology&nbsp;
           </button>
